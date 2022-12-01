@@ -1,0 +1,47 @@
+.App{
+    text-align: center;
+}
+.navbar-nav {
+    flex-direction: row;
+    gap:15px;
+}
+.form-login{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-login__item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.form-login__item p{
+    color: red;
+    font-size: 12px;
+}
+.containerRegister__form-register{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.containerRegister__form-register__item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.containerRegister__form-register__item p{
+    color: red;
+    font-size: 12px;
+}
+.botonsRegister{
+    color: blue;
+    text-decoration: underline;
+    font-size: 12px;
+}
+.CrearUnaOrden{
+    text-align: right;
+}
+.col-lg-7{
+    margin: auto;
+}
+
