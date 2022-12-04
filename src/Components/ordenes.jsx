@@ -1,20 +1,42 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react"
-
-const Ordenes = ({data})=>{
+import axios from "axios";
+const Ordenes = ({data, ordenId})=>{
 
   const[isEdit, setIsEdit]=useState(false)
   
-    const { register, formState: { errors }, handleSubmit, setValue } = useForm();
+  const { register, formState: { errors }, handleSubmit, setValue } = useForm();
     
-    const customSubmit = (dataForm) => {
-      if(isEdit){
-        console.log("Aquí va la lógica de Editar")
-      } else {
-        console.log("Aquí va la lógica de Crear")
-      }
-      console.log('dataForm', dataForm)}
+  const customSubmit = (dataForm) => {
+        const ordenObjet={
+        id:"2",
+        fecha: dataForm.crearOrden1,
+        ciudadEntrega:dataForm.crearOrden4,
+        direccionEntrega:dataForm.crearOrden12,
+        hora: dataForm.crearOrden2,
+        ciudadOrigen:dataForm.crearOrden3,
+        peso:dataForm.crearOrden5,
+        ancho:dataForm.crearOrden6,
+        largo:dataForm.crearOrden8,
+        alto:dataForm.crearOrden7,
+        direccionOrigen:dataForm.crearOrden9,
+        nombreDestinatario:dataForm.crearOrden10,
+        ccDestinatario: dataForm.crearOrden11,
+        userId: "63880a8c493f62ecb6cd607b",
+        estado: "en proceso"
+          
+        }
+        if (isEdit) {
+          axios
+              .put("http:localhost:5000/ordenes/edit/" + ordenId, ordenObjet)
+              .then(response => console.log(response.data))
+        } else {
+          axios
+              .post("http://localhost:5000/ordenes/create", ordenObjet)
+              .then(response => console.log(response.data))
+        }
+        }
     
     useEffect(()=>{
       if (data.length !== 0){
@@ -32,7 +54,7 @@ const Ordenes = ({data})=>{
           setValue('crearOrden11',data.ccDestinatario)
           setValue('crearOrden12',data.direccionEntrega)  
       }
-    }) 
+    }, []) 
     return(
         
         <div className="col-lg-7">  

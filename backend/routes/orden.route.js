@@ -18,9 +18,9 @@ router.route('/create').post((req, res, next)=>{
     })
 })
 //READ ordenes
-//localhost:5000/ordenes/
-router.route('/').get((req, res)=>{
-    ordenSchema.find((error,data)=>{
+//localhost:5000/ordenes?userId=1234
+router.route('/').get((req, res,next)=>{
+    ordenSchema.find({userId: req.query.userId}, (error,data)=>{
         if (error) {
             return next(error)
         } else {
@@ -29,7 +29,7 @@ router.route('/').get((req, res)=>{
     })
 })
 //localhost:5000/ordenes/1
-router.route('/:id').get((req, res)=>{
+router.route('/:id').get((req, res, next)=>{
     ordenSchema.findById(req.params.id,(error,data)=>{
         if (error) {
             return next(error)
@@ -48,6 +48,7 @@ router.route('/edit/:id').put((req, res, next)=>{
         if (error) {
             return next(error)
         } else {
+            console.log('orden updated successfully !')
             res.json(data)
         }
     })

@@ -52,7 +52,7 @@ router.route('/edit/:id').put((req, res, next) => {
         if (error) {
             return next(error)
         } else {
-            console.log('Student updated successfully !')
+            console.log('user updated successfully !')
             res.json(data)
         }
     })

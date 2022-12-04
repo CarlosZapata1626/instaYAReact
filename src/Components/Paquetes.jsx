@@ -1,34 +1,11 @@
-import{useState} from "react";
+import{useEffect,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {useForm} from "react-hook-form"
 import { NavLink,Link} from "react-router-dom"
 import { useParams } from "react-router-dom";
-const Ordenes=[
-  {
-    id:1,
-    fecha:'2022-12-12',
-    ciudadEntrega: 'Medellin',
-    direccionEntrada: 'calle123',
-    Estado:'en camino'
+import axios from "axios"
 
-  },
-  {
-    id:2,
-    fecha:'2022-12-12',
-    ciudadEntrega: 'Bogota',
-    direccionEntrada: 'calle123',
-    Estado:'en camino'
 
-  },
-  {
-    id:3,
-    fecha:'2022-12-12',
-    ciudadEntrega: 'Medellin',
-    direccionEntrada: 'calle123',
-    Estado:'en camino'
-    
-
-  },]
 
   const labels=[
     "# Servicio",
@@ -40,6 +17,23 @@ const Ordenes=[
   ]
 
 const Paquetes = ()=>{
+    
+    const [ordenes, setOrdenes]= useState(null)
+    const [update, setUpdate] = useState(false)
+
+    useEffect(()=>{
+      const userId= "63880a8c493f62ecb6cd607b"
+      axios
+          .get("http://localhost:5000/ordenes?userId=" + userId)
+          .then(response => {
+            console.log(response.data)
+            setOrdenes(response.data)
+            })
+    },[])
+const deleteClick= () =>{
+  console.log('Delete')
+}
+
     return(
         <div className="table-responsive">
         <div className='CrearUnaOrden'>
@@ -54,22 +48,22 @@ const Paquetes = ()=>{
             </tr>            
           </thead>
           <tbody>
-            {Ordenes.map((orden,index)=>{
+            {ordenes !== null? ordenes.map((orden,index)=>{
               return (
               <tr key={index}>
                         <th scope="row">
-                          <Link to={"/Consulta/" + orden.id}>{orden.id}</Link>
+                          <Link to={"/Consulta/" + orden._id}>{index}</Link>
                           </th>
                         <td>{orden.fecha}</td>
                         <td>{orden.ciudadEntrega}</td>
-                        <td>{orden.direccionEntrada}</td>
-                        <td>{orden.Estado}</td>
+                        <td>{orden.direccionEntrega}</td>
+                        <td>{orden.estado}</td>
                         <td className="d-flex gap-2 justify-content-center">
-                          <Link className="btn btn-success" to={'/Consulta/'+orden.id+'/ActualizarOrden'}>editar</Link>
-                          <Link className="btn btn-danger" to={'/Consulta/'+orden.id+'/Delete'}>Eliminar</Link>
+                          <Link className="btn btn-success" to={'/Consulta/'+orden._id+'/ActualizarOrden'}>editar</Link>
+                          <a className="btn btn-danger" onClick={deleteClick}>Eliminar</a>
                         </td>
                       </tr>)
-            })}
+            }):''}
           </tbody>
         
         </table>

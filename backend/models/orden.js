@@ -23,7 +23,7 @@ let ordenSchema=new Schema({
         required:true
     },
     hora: {
-        type:Date,
+        type:String,
         required:true
     },
     ciudadOrigen: {
@@ -58,8 +58,8 @@ let ordenSchema=new Schema({
         type:String,
         required:true
     },
-    userid: {
-        type:Schema.Types.ObjectId, ref:'User'
+    userId: {
+        type: Schema.Types.ObjectId, ref:'User'
     },
     
 },{
