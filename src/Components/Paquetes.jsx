@@ -29,7 +29,7 @@ const Paquetes = ()=>{
             console.log(response.data)
             setOrdenes(response.data)
             })
-    },[])
+    },[update])
 const deleteClick= (ordenId) =>{
   axios
             .delete("http://localhost:5000/ordenes/delete/" + ordenId)
