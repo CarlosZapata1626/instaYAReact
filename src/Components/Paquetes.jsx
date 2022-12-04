@@ -30,8 +30,13 @@ const Paquetes = ()=>{
             setOrdenes(response.data)
             })
     },[])
-const deleteClick= () =>{
-  console.log('Delete')
+const deleteClick= (ordenId) =>{
+  axios
+            .delete("http://localhost:5000/ordenes/delete/" + ordenId)
+            .then(response => {
+                console.log(response.data)
+                setUpdate(!update)
+            })
 }
 
     return(
@@ -60,7 +65,7 @@ const deleteClick= () =>{
                         <td>{orden.estado}</td>
                         <td className="d-flex gap-2 justify-content-center">
                           <Link className="btn btn-success" to={'/Consulta/'+orden._id+'/ActualizarOrden'}>editar</Link>
-                          <a className="btn btn-danger" onClick={deleteClick}>Eliminar</a>
+                          <a className="btn btn-danger" onClick={()=>deleteClick(orden._id)}>Eliminar</a>
                         </td>
                       </tr>)
             }):''}
