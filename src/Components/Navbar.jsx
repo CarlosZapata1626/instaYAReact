@@ -3,7 +3,7 @@ const Navbar = () => {
 return(
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <div className="container-fluid">
-        <a className="navbar-brand" href="#">instaYA</a>
+        <a className="navbar-brand"  href="#">instaYA</a>
         <div id="navbarNav">
             <ul className="navbar-nav">
                 <li className="nav-item">

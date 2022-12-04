@@ -45,3 +45,19 @@
     margin: auto;
 }
 /**/
+.instaYA_logo{
+font-family: 'Emblema One';
+}
+.form-inicial{
+   
+    box-sizing: border-box;
+}
+.navbar-brand{
+    font-family: 'Emblema One';
+}
+.ingrese_orden{
+    display: auto;
+    text-align: center;
+    display: inline-flex;
+    gap: 20px;
+}

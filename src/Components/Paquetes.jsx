@@ -57,7 +57,7 @@ const deleteClick= (ordenId) =>{
               return (
               <tr key={index}>
                         <th scope="row">
-                          <Link to={"/Consulta/" + orden._id}>{index}</Link>
+                          <Link to={"/Consulta/" + orden._id}>{index +1}</Link>
                           </th>
                         <td>{orden.fecha}</td>
                         <td>{orden.ciudadEntrega}</td>
