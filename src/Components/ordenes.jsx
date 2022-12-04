@@ -29,7 +29,7 @@ const Ordenes = ({data, ordenId})=>{
         }
         if (isEdit) {
           axios
-              .put("http:localhost:5000/ordenes/edit/" + ordenId, ordenObjet)
+              .put("http://localhost:5000/ordenes/edit/" + ordenId, ordenObjet)
               .then(response => console.log(response.data))
         } else {
           axios

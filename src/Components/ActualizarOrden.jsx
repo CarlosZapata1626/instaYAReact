@@ -1,34 +1,33 @@
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react"
 import Ordenes from "./ordenes";
+import axios from "axios"
+import dateFormat from "dateformat"
 
-const ordenData={
-    id:1,
-    fecha:'2022-12-12',
-    ciudadEntrega: 'Medellin',
-    direccionEntrega: 'calle123',
-    estado:'en camino',
-    hora:"15:00",
-    ciudadOrigen:"Cartagena",
-    peso:"20",
-    ancho:"50",
-    largo:"20",
-    alto:"20",
-    direccionOrigen:"call 9na",
-    nombreDestinatario:"Carlos",
-    ccDestinatario:"1111111"
+const ActualizarOrden = () => {
+    const { id } = useParams()
+    const [orden, setOrden] = useState(null)
 
-
-
-}
-const ActualizarOrden = ()=>{
-    const {id} =useParams()
-
+    useEffect(() => {
+        axios
+            .get("http://localhost:5000/ordenes/" + id)
+            .then(response => {
+                console.log(response.data)
+                const fecha = response.data.fecha
+                response.data['fecha'] = dateFormat(fecha, "yyyy-mm-dd")
+                setOrden(response.data)
+            })
+    }, [])
     return(
-        <div>
-        <h3>Información de envío</h3>
-        <p>Por favor, Actualice sus datos de la orden #{id}:</p>
-        <Ordenes data={ordenData}/>
-        </div>
+        <>
+            {orden ? (
+                <>
+                    <h3>Información de envío</h3>
+                    <p>Por favor, Actualice datos de la orden #{id}:</p>
+                    <Ordenes data={orden} ordenId={id}/>
+                 </>
+            ) : ''}
+        </>
         );
 }
 export default ActualizarOrden;
